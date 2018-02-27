@@ -38,6 +38,8 @@ This error can be observed if there is a memory conflict between the binary to l
 * J-flash lite 
 * nrfjprog command line script
 
+For more information about the issue, please see :
+https://devzone.nordicsemi.com/f/nordic-q-a/18278/error-flash-download-failed---cortex---m4-while-flashing-softdevice-from-keil-uvision-5
 
 ## Example Details 
 
