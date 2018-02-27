@@ -34,7 +34,7 @@ This error can be observed if there is a memory conflict between the code to loa
 
 ## Example Details 
 
-#### Single Sided Two Way Ranging Initiator
+### Single Sided Two Way Ranging Initiator
 
 This example contains the source code for the initiator in a SS-TWR scheme. The initiator will send a frame, wait for the response from the receiver, calculate the distance and output it on the UART (can be osbserved on a serial terminal)
 
@@ -57,7 +57,7 @@ Calibration may be necessary in order to have an accurate measurement. It can be
 
 
 
-##### Single Sided Two Way Ranging Responder
+#### Single Sided Two Way Ranging Responder
 
 This example contains the source code for the responder in a SS-TWR scheme. The receiver will receive a frame from the initiator and send the corresponding answer.
 
@@ -77,9 +77,7 @@ The application functionnement is detailed in the main.c and the ss_resp_main.c 
 
 Calibration may be necessary in order to have an accurate measurement. It can be done by adjusting the antenna delay which is hardware dependent. 
 
-
-
-##### Two Wire Interface Accelerometer
+#### Two Wire Interface Accelerometer
 
 This example contains the source code for the TWI-Accelerometer example. With this application, the blue led will be on when a motion is detected by the LIS2DH12. It also reports the accelerometer state on the UART.
 
