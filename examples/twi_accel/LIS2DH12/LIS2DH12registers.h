@@ -16,6 +16,8 @@
 #define	WHO_AM_I		0x0f
 #define	I_AM				0x33
 
+#define	CTRL_REG0		0x1e
+
 #define CTRL_REG1		0x20
 #define X_EN				0x01
 #define Y_EN				0x02
@@ -125,3 +127,13 @@
 #define	THS_FS2G_64mg	4
 
 #define	INT1_DURATION	0x33
+
+// INT2 registers
+#define	INT2_CFG			0x34
+#define INT2_SRC			0x35
+#define INT2_THS			0x36
+#define	INT2_DURATION	0x37
+
+// Click event control registers
+#define	CLICK_CFG			0x38
+#define	CLICK_SRC			0x39

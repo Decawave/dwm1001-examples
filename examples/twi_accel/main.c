@@ -24,7 +24,6 @@
 #include "boards.h"
 
 // Select one of the following test modes:
-//
 #define TEST_MODE_MOTION_DETECT
 //#define	TEST_MODE_FIFO
 
@@ -41,7 +40,7 @@ static void vTestModeMotionDetect(void);
 #define	BLUE_LED	BSP_BOARD_LED_1
 
 /*!
-* @brief Enter point for twi_accel application.
+* @brief Enter point for accelerometer application.
 *
 * Initialise and configured the TWI, UART, LIS2DH12, LEDs.
 * Configure the LIS2DH12 into a test mode.
@@ -57,8 +56,6 @@ int main(void)
 	// LED management - green LED on indicates MCU active
 	bsp_board_leds_init();
 	bsp_board_led_on(GREEN_LED);
-
-
 	
 	// UART for simple STDIO, ignore initialisation errors
 	(void) boUART_Init();
@@ -76,8 +73,7 @@ int main(void)
 	// Check the TWI and acceleromter are talking
 	uint8_t u8ID = u8LIS2_TestRead();
 	printf("LIS2DH12 - Who am I code:%x\n", u8ID);
-	vLIS2_PowerDown();
-
+	
 #ifdef TEST_MODE_FIFO
 	// Set LIS2DH12 into FIFO mode
 	vTestModeFifo();
@@ -110,21 +106,21 @@ int main(void)
 static void	vTestModeFifo(void)
 {
 	vLIS2_EnableFifoSampling();
-
-	// Blue LED toggles between sampling periods.
-	// Accelerometer task toggles the LED.
-	bsp_board_led_on(BLUE_LED);
+	
+	// Finished processing, turn green LED off
+	bsp_board_led_off(GREEN_LED);
 
 	// Loop in test mode, waiting for FIFO full events
 	while (true)
 	{
+		// Blue LED toggles between sampling periods.
+		// Accelerometer task toggles the LED.
 		vLIS2_Task();
 		
-		// Put MCU into low-power mode until event occurs
-		// Green LED indicates MCU is active.
-		bsp_board_led_off(GREEN_LED);
-		__WFE();
-		bsp_board_led_on(GREEN_LED);
+		// Option: could put MCU into low-power mode until
+		// next event (fifo full) occurs, but simple UART
+		// driver output stream might be truncated.
+		//__WFE();
 	}
 }
 #endif

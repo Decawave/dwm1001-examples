@@ -22,7 +22,8 @@
 // Local variables and constants
 
 // Blue LED toggles between FIFO sample intervals
-#define	BLUE_LED	BSP_LED_3
+#define	BLUE_LED	BSP_BOARD_LED_1
+#define	GREEN_LED	BSP_BOARD_LED_0
 
 // FIFO element
 struct sFifoXYZelement
@@ -61,6 +62,7 @@ static void vInterruptHandler		(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t 
 static void vThresholdConfigure	(uint8_t u8Level, uint8_t u8Duration, uint8_t u8Mode);
 static void vDumpFifo						(uint8_t u8Num);
 
+
 // Public interface functions
 
 /*!
@@ -79,18 +81,20 @@ void vLIS2_Init (void)
 {
 	// If this function is called after power on, then the LIS2DH12
 	// will still be in boot mode, allow time for boot to complete. 
-	nrf_delay_ms(10);
+	nrf_delay_ms(20);
+	
+	// Disable all interrupt sources
+	vTWI_Write(INT1_CFG,  0);
 
-	// If called by a power on reset, then force the device to boot,
-	// allowing time for the boot to complete.
-	vTWI_Write(CTRL_REG5, BOOT);
+	// Clear any pending interrupts
+	uint8_t u8Reg;
+	vTWI_Read(INT1_SRC, &u8Reg);	
+
+	// Put device into power-down
+	vLIS2_PowerDown();
 	nrf_delay_ms(10);
 	
-	// Put device into low-power mode.
-	vTWI_Write(CTRL_REG4, HIRES_MODE);
-	vTWI_Write(CTRL_REG1, (X_EN | LPEN | ODR_1Hz));
-
-	// Configure MCU to accept LIS2DH12 INT1 pin interrupts
+	// Enable MCU interrupts from INT1 pin
 	vInterruptInit();
 }
 
@@ -179,7 +183,6 @@ void vLIS2_EnableFifoSampling (void)
 	vTWI_Write(FIFO_CTRL_REG, (STREAM_MODE | TR_INT1 | FIFO_WATERMARK_30));
 }
 
-
 /*!
 * @brief Polled function call returning interrupt event semaphore.
 */
@@ -217,13 +220,17 @@ void vLIS2_Task (void)
 	{
 		uint8_t u8FifoStat;
 		uint8_t u8NumReadings;
+		
+		bsp_board_led_on(GREEN_LED);
 
 		// clear the interrupt source, ignore status reg contents
 		vTWI_Read(INT1_SRC, &u8FifoStat);
+		printf("INT1_SRC: 0x%x\n", u8FifoStat);
 		
 		// Find number of FIFO samples
 		vTWI_Read(FIFO_SRC_REG, &u8FifoStat);
 		u8NumReadings = u8FifoStat & FSS_MASK;
+		printf("Readings: %d\n", u8NumReadings);
 
 		// Read all LIS2 FIFO samples to local structure
 		uint8_t u8Cnt, u8Reading, u8LoData;
@@ -253,6 +260,9 @@ void vLIS2_Task (void)
 		
 		// wait for Fifo to refill
 		boInterruptEvent = false;
+		
+		// Indicate end of fifo processing
+		bsp_board_led_off(GREEN_LED);
 		
 		// Toggle the FIFO state LED
 		bsp_board_led_invert(BLUE_LED);
@@ -358,3 +368,62 @@ static void vDumpFifo(uint8_t u8Num)
 					);
 	}
 }
+
+#ifdef LIS2DH12_DEBUG
+// Useful debug tool, dump accelerometer registers
+// via the UART.
+
+// Forward declation - place at top of file.
+// 			static void vDebugDumpRegisters(void);
+
+static void vDebugDumpRegisters(void)
+{
+	uint8_t u8Reg;
+	
+	vTWI_Read(CTRL_REG0, &u8Reg);
+	printf("C_REG_0: 0x%x\n", u8Reg);
+	vTWI_Read(CTRL_REG1, &u8Reg);
+	printf("C_REG_1: 0x%x\n", u8Reg);
+	vTWI_Read(CTRL_REG2, &u8Reg);
+	printf("C_REG_2: 0x%x\n", u8Reg);
+	vTWI_Read(CTRL_REG3, &u8Reg);
+	printf("C_REG_3: 0x%x\n", u8Reg);
+	vTWI_Read(CTRL_REG4, &u8Reg);
+	printf("C_REG_4: 0x%x\n", u8Reg);
+	vTWI_Read(CTRL_REG5, &u8Reg);
+	printf("C_REG_5: 0x%x\n", u8Reg);
+	vTWI_Read(CTRL_REG6, &u8Reg);
+	printf("C_REG_6: 0x%x\n", u8Reg);
+	
+	vTWI_Read(REFERENCE_REG, &u8Reg);
+	printf("REFERENCE: 0x%x\n", u8Reg);
+	vTWI_Read(STATUS_REG_ADD, &u8Reg);
+	printf("STATUS: 0x%x\n", u8Reg);
+	
+	vTWI_Read(FIFO_CTRL_REG, &u8Reg);
+	printf("FIFO_CTRL: 0x%x\n", u8Reg);
+	vTWI_Read(FIFO_SRC_REG, &u8Reg);
+	printf("FIFO_SRC: 0x%x\n", u8Reg);
+	
+	vTWI_Read(INT1_CFG, &u8Reg);
+	printf("INT1_CFG: 0x%x\n", u8Reg);
+	vTWI_Read(INT1_SRC, &u8Reg);
+	printf("INT1_SRC: 0x%x\n", u8Reg);	
+	vTWI_Read(INT1_THS, &u8Reg);
+	printf("INT1_THS: 0x%x\n", u8Reg);	
+	vTWI_Read(INT1_DURATION, &u8Reg);
+	printf("INT1_DURATION: 0x%x\n", u8Reg);
+	
+	vTWI_Read(INT2_CFG, &u8Reg);
+	printf("INT2_CFG: 0x%x\n", u8Reg);
+	vTWI_Read(INT2_SRC, &u8Reg);
+	printf("INT2_SRC: 0x%x\n", u8Reg);	
+	vTWI_Read(INT2_THS, &u8Reg);
+	printf("INT2_THS: 0x%x\n", u8Reg);	
+	vTWI_Read(INT2_DURATION, &u8Reg);
+	printf("INT2_DURATION: 0x%x\n", u8Reg);
+	
+	vTWI_Read(CLICK_SRC, &u8Reg);
+	printf("CLICK_SRC: 0x%x\n", u8Reg);
+}
+#endif // LIS2DH12_DEBUG
