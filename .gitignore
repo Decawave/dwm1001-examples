@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Build directories
+./example/*/_build
+
+# Arm project user dependant file 
+./example/*.uvguix.*

@@ -29,12 +29,12 @@
 #include "app_util_platform.h"
 #include "app_error.h"
 #include <string.h>
-
 #include "port_platform.h"
 #include "deca_types.h"
 #include "deca_param_types.h"
 #include "deca_regs.h"
 #include "deca_device_api.h"
+#include "uart.h"
 	
 //-----------------dw1000----------------------------
 
@@ -124,6 +124,10 @@ int main(void)
 
 		/* Setup DW1000 IRQ pin */
 	  nrf_gpio_cfg_input(DW1000_IRQ, NRF_GPIO_PIN_NOPULL); 		//irq
+	
+		/*Initialization UART*/
+		boUART_Init ();
+		printf("Singled Sided Two Way Ranging Initiator Example \r\n");
 	
 		/* Reset DW1000 */
     reset_DW1000(); 

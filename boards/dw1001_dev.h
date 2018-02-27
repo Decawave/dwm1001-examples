@@ -88,6 +88,14 @@
 #define SPIM2_MISO_PIN  14  // SPI Master In Slave Out GPIO pin number.
 #define SPIM2_SS_PIN    15  // SPI Slave Select GPIO pin number.
 
+// UART symbolic constants
+// NOTE - using pins from the RPI interface connector
+// 				NOT compatible with RPi Gateway builds
+#define TX_PIN_NUM			5		// DWM1001 module pin 20, DEV board name RXD
+#define RX_PIN_NUM			11		// DWM1001 module pin 18, DEV board name TXD
+#define RTS_PIN_NUM			UART_PIN_DISCONNECTED
+#define CTS_PIN_NUM			UART_PIN_DISCONNECTED
+
 // serialization APPLICATION board - temp. setup for running serialized MEMU tests
 #define SER_APP_RX_PIN              23    // UART RX pin number.
 #define SER_APP_TX_PIN              24    // UART TX pin number.

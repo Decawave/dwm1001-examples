@@ -4221,7 +4221,15 @@
 // </h> 
 //==========================================================
 
+// <q> RETARGET_ENABLED  - retarget - Retargeting stdio functions
+ 
+
+#ifndef RETARGET_ENABLED
+#define RETARGET_ENABLED 1
+#endif
+
 // </h> 
+
 //==========================================================
 
 // <h> nRF_Log 

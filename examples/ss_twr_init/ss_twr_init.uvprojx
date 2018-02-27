@@ -336,7 +336,7 @@
               <MiscControls>--reduce_paths</MiscControls>
               <Define>BOARD_DW1001_DEV BSP_SIMPLE  CONFIG_GPIO_AS_PINRESET FLOAT_ABI_HARD NRF52 NRF52832_XXAA NRF52_PAN_74 SWI_DISABLE0</Define>
               <Undefine></Undefine>
-              <IncludePath>.\config;..\..\nRF5_SDK_14.2.0\components;..\..\nRF5_SDK_14.2.0\components\boards;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\clock;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\common;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\delay;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\gpiote;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\hal;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\nrf_soc_nosd;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\spi_master;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\uart;..\..\nRF5_SDK_14.2.0\components\libraries\atomic;..\..\nRF5_SDK_14.2.0\components\libraries\balloc;..\..\nRF5_SDK_14.2.0\components\libraries\bsp;..\..\nRF5_SDK_14.2.0\components\libraries\button;..\..\nRF5_SDK_14.2.0\components\libraries\experimental_log;..\..\nRF5_SDK_14.2.0\components\libraries\experimental_log\src;..\..\nRF5_SDK_14.2.0\components\libraries\experimental_memobj;..\..\nRF5_SDK_14.2.0\components\libraries\experimental_section_vars;..\..\nRF5_SDK_14.2.0\components\libraries\scheduler;..\..\nRF5_SDK_14.2.0\components\libraries\strerror;..\..\nRF5_SDK_14.2.0\components\libraries\timer;..\..\nRF5_SDK_14.2.0\components\libraries\util;..\..\nRF5_SDK_14.2.0\components\toolchain;..\..\deca_driver;..\..\deca_driver\port;..\..\nRF5_SDK_14.2.0\external\fprintf;..\..\nRF5_SDK_14.2.0\external\segger_rtt;..\..\nRF5_SDK_14.2.0\external\freertos\;..\..\nRF5_SDK_14.2.0\external\freertos\source;..\..\nRF5_SDK_14.2.0\external\freertos\config;..\..\nRF5_SDK_14.2.0\external\freertos\source\include;..\..\nRF5_SDK_14.2.0\external\freertos\portable\ARM\nrf52;..\..\nRF5_SDK_14.2.0\external\freertos\portable\CMSIS\nrf52;..\..\nRF5_SDK_14.2.0\external\freertos\source\portable;..\..;..\..\boards</IncludePath>
+              <IncludePath>.\UART;.\config;..\..\nRF5_SDK_14.2.0\components;..\..\nRF5_SDK_14.2.0\components\boards;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\clock;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\common;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\delay;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\gpiote;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\hal;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\nrf_soc_nosd;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\spi_master;..\..\nRF5_SDK_14.2.0\components\drivers_nrf\uart;..\..\nRF5_SDK_14.2.0\components\libraries\atomic;..\..\nRF5_SDK_14.2.0\components\libraries\balloc;..\..\nRF5_SDK_14.2.0\components\libraries\bsp;..\..\nRF5_SDK_14.2.0\components\libraries\button;..\..\nRF5_SDK_14.2.0\components\libraries\fifo;..\..\nRF5_SDK_14.2.0\components\libraries\experimental_log;..\..\nRF5_SDK_14.2.0\components\libraries\experimental_log\src;..\..\nRF5_SDK_14.2.0\components\libraries\experimental_memobj;..\..\nRF5_SDK_14.2.0\components\libraries\experimental_section_vars;..\..\nRF5_SDK_14.2.0\components\libraries\scheduler;..\..\nRF5_SDK_14.2.0\components\libraries\strerror;..\..\nRF5_SDK_14.2.0\components\libraries\timer;..\..\nRF5_SDK_14.2.0\components\libraries\util;..\..\nRF5_SDK_14.2.0\components\libraries\uart;..\..\nRF5_SDK_14.2.0\components\toolchain;..\..\deca_driver;..\..\deca_driver\port;..\..\nRF5_SDK_14.2.0\external\fprintf;..\..\nRF5_SDK_14.2.0\external\segger_rtt;..\..\nRF5_SDK_14.2.0\external\freertos\;..\..\nRF5_SDK_14.2.0\external\freertos\source;..\..\nRF5_SDK_14.2.0\external\freertos\config;..\..\nRF5_SDK_14.2.0\external\freertos\source\include;..\..\nRF5_SDK_14.2.0\external\freertos\portable\ARM\nrf52;..\..\nRF5_SDK_14.2.0\external\freertos\portable\CMSIS\nrf52;..\..\nRF5_SDK_14.2.0\external\freertos\source\portable;..\..\boards;..\..</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -510,6 +510,21 @@
               <FileType>1</FileType>
               <FilePath>..\..\nRF5_SDK_14.2.0\components\libraries\strerror\nrf_strerror.c</FilePath>
             </File>
+            <File>
+              <FileName>app_fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\nRF5_SDK_14.2.0\components\libraries\fifo\app_fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_uart_fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\nRF5_SDK_14.2.0\components\libraries\uart\app_uart_fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>retarget.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\nRF5_SDK_14.2.0\components\libraries\uart\retarget.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -659,6 +674,16 @@
               <FileName>FreeRTOSConfig.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\nRF5_SDK_14.2.0\external\freertos\config\FreeRTOSConfig.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Uart</GroupName>
+          <Files>
+            <File>
+              <FileName>UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART\UART.c</FilePath>
             </File>
           </Files>
         </Group>
