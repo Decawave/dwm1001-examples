@@ -50,7 +50,7 @@ CMSIS 5 CMSIS-CORE Support Package                       5.02
 CMSIS-CORE Support Package                               4.05
 Nordic Semiconductor nRF CPU Support Package             1.06
 
-They can be install from SES itself, through the package manager in the tool menu. 
+They can be install from SES itself, through the package manager in the tools menu. 
 
 ## KEIL µVision IDE
 
