@@ -24,6 +24,21 @@ dwm1001-keil-examples/
 ```
 For more information about nrF52832 and nrF SDK, please visit http://infocenter.nordicsemi.com/
 
+## Supported IDE
+
+The examples are ready to use with the following IDE :
+* Segger Embedded Studio (SES)
+* Keil KEIL µVision
+
+## Segger Embedded Studio
+
+Each example contains a emproject project file for SES. The examples compile and load cleanly to the DWM1001. 
+
+SES has a free license for nrF52832 development. Consequently, this IDE can be used without any limitation for DWM1001 development.
+
+For more information regarding Segger Embedded Studio, please visit https://www.segger.com/products/development-tools/embedded-studio/
+
+For more information about free license for nrF52832, please read https://www.nordicsemi.com/News/News-releases/Product-Related-News/Nordic-Semiconductor-adds-Embedded-Studio-IDE-support-for-nRF51-and-nRF52-SoC-development
 
 ## KEIL µVision IDE
 
@@ -31,7 +46,7 @@ Each example contains a µVision5 project file for Keil µVision IDE. The exampl
 
 Keil µVision has a free license for project up to 32KB. For more information regarding Keil µVision, please visit http://www2.keil.com/mdk5/uvision/
 
-## Error: Flash Download failed - "Cortex-M4"
+### Error: Flash Download failed - "Cortex-M4"
 
 This error can be observed if there is a memory conflict between the binary to load and the current firmware on the target hardware. This issue can be easily fixed by fully erasing the target device 's flash memory. Keil µVision cannot perform a full erase and the following free tool can be used :
 
@@ -53,15 +68,14 @@ This example contains the source code for the initiator. The initiator will send
 ```
 dwm1001-keil-examples/examples/ss_twr_init/
 ├── config                    // Contains sdk_config.h file for nrF SDK 14.2 customization
-├── EventRecorderStub.scvd
-├── JLinkLog.txt
-├── JLinkSettings.ini
 ├── main.c                    // Initialization and main program
-├── RTE
 ├── ss_init_main.c            // Single sided initiator core program
-├── ss_twr_init.uvoptx
-├── ss_twr_init.uvprojx       // Keil project
-└── UART                      // Uart 
+├── UART                      // Uart 
+├── SES
+│   └── ss_twr_init.emProject // Segger Embedded Studio project
+└── Keil uvision
+     └── ss_twr_init.uvprojx  // Keil uvision project
+
 ```
 The application functionnement is detailed in the main.c and the ss_init_main.c files. 
 
@@ -74,14 +88,12 @@ This example contains the source code for the responder. The receiver will recei
 ```
 dwm1001-keil-examples/examples/ss_twr_resp/
 ├── config                    // Contains sdk_config.h file for nrF SDK 14.2 customization
-├── EventRecorderStub.scvd
-├── JLinkLog.txt
-├── JLinkSettings.ini
 ├── main.c                    // Initialization and main program
-├── RTE
 ├── ss_resp_main.c            // Single sided responder core program
-├── ss_twr_resp.uvoptx
-└── ss_twr_resp.uvprojx       // Keil project
+├── SES
+│   └── ss_twr_resp.emProject // Segger Embedded Studio project
+└── Keil uvision
+     └── ss_twr_resp.uvprojx  // Keil uvision project
 ```
 The application functionnement is detailed in the main.c and the ss_resp_main.c files. 
 
@@ -95,16 +107,14 @@ The blue led will be on when a motion is detected by the LIS2DH12. It also repor
 ```
 dwm1001-keil-examples/examples/twi_accel/
 ├── config                    // Contains sdk_config.h file for nrF SDK 14.2 customization
-├── EventRecorderStub.scvd
-├── JLinkLog.txt
-├── JLinkSettings.ini
 ├── LIS2DH12                  // LIS2DH12 (accelerometer) low level driver and api
 ├── main.c                    // Initialization and main program
-├── RTE
 ├── TWI                       // TWI
-├── twi_accel.uvoptx
-├── twi_accel.uvprojx         // Keil Project
-└── UART                      // Uart
+├── UART                      // Uart
+├── SES
+│   └── twi_accel.emProject // Segger Embedded Studio project
+└── Keil uvision
+     └── twi_accel.uvprojx  // Keil uvision project
 ```
 The application functionnement is detailed in the main.c file.
 
