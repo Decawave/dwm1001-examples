@@ -57,6 +57,10 @@ static dwt_config_t config = {
 /* Delay between frames, in UWB microseconds. See NOTE 1 below. */
 #define POLL_TX_TO_RESP_RX_DLY_UUS 1800
 
+/*Should be accurately calculated during calibration*/
+#define TX_ANT_DLY 16300
+#define RX_ANT_DLY 16456	
+
 //--------------dw1000---end---------------
 
 

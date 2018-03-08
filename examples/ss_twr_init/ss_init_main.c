@@ -156,7 +156,7 @@ int ss_init_run(void)
 
                 tof = ((rtd_init - rtd_resp * (1.0f - clockOffsetRatio)) / 2.0f) * DWT_TIME_UNITS; // Specifying 1.0f and 2.0f are floats to clear warning 
                 distance = tof * SPEED_OF_LIGHT;
-								printf("Distance : %f\r\n",distance);
+                printf("Distance : %f\r\n",distance);
 			
 
             }

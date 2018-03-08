@@ -51,8 +51,11 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# Build directories
-./example/*/_build
+# Keil Build directories
+./example/*/*/_build
+
+# SES Build directories
+./example/*/*/output
 
 # Arm project user dependant file 
-./example/*.uvguix.*
+./example/*/*.uvguix.*
