@@ -32,7 +32,8 @@ The examples are ready to use with the following IDE :
 
 ## Segger Embedded Studio
 
-Each example contains a emproject project file for SES. The examples compile and load cleanly to the DWM1001. 
+Each example contains a emproject project file for SES. The examples compile and load cleanly to the DWM1001.   
+The project was created with the SES version V3.34a. 
 
 SES has a free license for nrF52832 development. Consequently, this IDE can be used without any limitation for DWM1001 development.
 
@@ -40,13 +41,25 @@ For more information regarding Segger Embedded Studio, please visit https://www.
 
 For more information about free license for nrF52832, please read https://www.nordicsemi.com/News/News-releases/Product-Related-News/Nordic-Semiconductor-adds-Embedded-Studio-IDE-support-for-nRF51-and-nRF52-SoC-development
 
+### SES : Additional Package
+
+When using SES IDE, you will need to install the following package :
+
+Package                                                  Version
+CMSIS 5 CMSIS-CORE Support Package                       5.02
+CMSIS-CORE Support Package                               4.05
+Nordic Semiconductor nRF CPU Support Package             1.06
+
+They can be install from SES itself, through the package manager in the tool menu. 
+
 ## KEIL µVision IDE
 
-Each example contains a µVision5 project file for Keil µVision IDE. The examples compile and load cleanly to the DWM1001. 
+Each example contains a µVision5 project file for Keil µVision IDE. The examples compile and load cleanly to the DWM1001.
+The project was created with the KEIL uVision version V5.24.2.0. 
 
 Keil µVision has a free license for project up to 32KB. For more information regarding Keil µVision, please visit http://www2.keil.com/mdk5/uvision/
 
-### Error: Flash Download failed - "Cortex-M4"
+### µVision Error: Flash Download failed - "Cortex-M4"
 
 This error can be observed if there is a memory conflict between the binary to load and the current firmware on the target hardware. This issue can be easily fixed by fully erasing the target device 's flash memory. Keil µVision cannot perform a full erase and the following free tool can be used :
 
