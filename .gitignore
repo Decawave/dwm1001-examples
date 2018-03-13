@@ -52,9 +52,11 @@ Mkfile.old
 dkms.conf
 
 # Keil Build directories
+./examples/*/*/_build/*
 ./examples/*/*/_build
 
 # SES Build directories
+./examples/*/*/output/*
 ./examples/*/*/output
 
 # Arm project user dependant file 
