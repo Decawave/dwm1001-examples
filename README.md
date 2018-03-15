@@ -90,7 +90,7 @@ dwm1001-keil-examples/examples/ss_twr_init/
      └── ss_twr_init.uvprojx  // Keil uvision project
 
 ```
-The application functionnement is detailed in the main.c and the ss_init_main.c files. 
+The application function is detailed in the main.c and the ss_init_main.c files. 
 
 Calibration may be necessary in order to have an accurate measurement. It can be done by adjusting the antenna delay which is hardware dependent. 
 
@@ -108,7 +108,7 @@ dwm1001-keil-examples/examples/ss_twr_resp/
 └── Keil uvision
      └── ss_twr_resp.uvprojx  // Keil uvision project
 ```
-The application functionnement is detailed in the main.c and the ss_resp_main.c files. 
+The application function is detailed in the main.c and the ss_resp_main.c files. 
 
 Calibration may be necessary in order to have an accurate measurement. It can be done by adjusting the antenna delay which is hardware dependent. 
 
@@ -129,7 +129,7 @@ dwm1001-keil-examples/examples/twi_accel/
 └── Keil uvision
      └── twi_accel.uvprojx  // Keil uvision project
 ```
-The application functionnement is detailed in the main.c file.
+The application function is detailed in the main.c file.
 
 
 
