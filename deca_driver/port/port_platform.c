@@ -99,61 +99,60 @@ void spi_event_handler(nrf_drv_spi_evt_t const * p_event, void * p_context)
 
 //================================================================================================
 int readfromspi(uint16 headerLength, const uint8 *headerBuffer, uint32 readlength, uint8 *readBuffer)
-{
-  uint8 idatabuf[DATALEN1]={0};
-  uint8 itempbuf[DATALEN1]={0};
-	
-	uint8 * p1;
-	uint32 idatalength=0;
-	
-	memset(idatabuf, 0, DATALEN1);
-	memset(itempbuf, 0, DATALEN1);	
-	
-	p1=idatabuf;	
-	memcpy(p1,headerBuffer, headerLength);
-	
-	p1 += headerLength;
-	memset(p1,0x00,readlength);
-	
-	idatalength= headerLength + readlength;
+{ uint8 * p1;
+  uint32 idatalength=0;
 
-	spi_xfer_done = false;
+  idatalength= headerLength + readlength;
+
+  uint8 idatabuf[idatalength];
+  uint8 itempbuf[idatalength];
+
+  memset(idatabuf, 0, idatalength);
+  memset(itempbuf, 0, idatalength);	
+
+  p1=idatabuf;	
+  memcpy(p1,headerBuffer, headerLength);
+
+  p1 += headerLength;
+  memset(p1,0x00,readlength);
+
+  spi_xfer_done = false;
   nrf_drv_spi_transfer(&spi, idatabuf, idatalength, itempbuf, idatalength);
-	while(!spi_xfer_done)				
-	  ;
-	
-	p1=itempbuf + headerLength;
-	
+  while(!spi_xfer_done)				
+  ;
+
+  p1=itempbuf + headerLength;
+
   memcpy(readBuffer, p1, readlength);
-	
-	return 0;
+
+  return 0;
 } 
 
 
 int writetospi( uint16 headerLength, const uint8 *headerBuffer, uint32 bodylength, const uint8 *bodyBuffer)
 {
-  uint8 idatabuf[DATALEN1]={0};
-  uint8 itempbuf[DATALEN1]={0};
-	
-	uint8 * p1;
-	uint32 idatalength=0;
-	
-	memset(idatabuf, 0, DATALEN1);
-	memset(itempbuf, 0, DATALEN1);		 
-	
-	p1=idatabuf;	
-	memcpy(p1,headerBuffer, headerLength);
-	p1 += headerLength;
-	memcpy(p1,bodyBuffer,bodylength);
-	
-	idatalength= headerLength + bodylength;
-	
-	spi_xfer_done = false;
-	nrf_drv_spi_transfer(&spi, idatabuf, idatalength, itempbuf, idatalength);
-	while(!spi_xfer_done)
-				;
+  uint8 * p1;
+  uint32 idatalength=0;
 
-	return 0;
+  idatalength= headerLength + bodylength;
+
+  uint8 idatabuf[idatalength];
+  uint8 itempbuf[idatalength];
+
+  memset(idatabuf, 0, idatalength);
+  memset(itempbuf, 0, idatalength);		 
+  
+  p1=idatabuf;	
+  memcpy(p1,headerBuffer, headerLength);
+  p1 += headerLength;
+  memcpy(p1,bodyBuffer,bodylength);
+  
+  spi_xfer_done = false;
+  nrf_drv_spi_transfer(&spi, idatabuf, idatalength, itempbuf, idatalength);
+  while(!spi_xfer_done)
+                          ;
+
+  return 0;
 } 
 
 //------------------------------other---------------------------
@@ -194,12 +193,12 @@ int writetospi( uint16 headerLength, const uint8 *headerBuffer, uint32 bodylengt
 void reset_DW1000(void)
 {
   nrf_gpio_cfg_output(DW1000_RST);   
-	nrf_gpio_pin_clear(DW1000_RST);  
-	nrf_delay_ms(200); 
-	nrf_gpio_pin_set(DW1000_RST);  
-	nrf_delay_ms(50); 
+  nrf_gpio_pin_clear(DW1000_RST);  
+  nrf_delay_ms(2); 
+  //nrf_gpio_pin_set(DW1000_RST);  
+  //nrf_delay_ms(50); 
   nrf_gpio_cfg_input(DW1000_RST, NRF_GPIO_PIN_NOPULL); 
-	nrf_delay_ms(2); 
+  nrf_delay_ms(2); 
 }
 
 /* @fn      port_set_dw1000_slowrate

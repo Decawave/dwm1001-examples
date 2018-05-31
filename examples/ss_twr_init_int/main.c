@@ -35,9 +35,12 @@
 #include "deca_regs.h"
 #include "deca_device_api.h"
 #include "uart.h"
+#include "ss_init_main.h"
+#include "nrf_drv_gpiote.h"
 	
 //-----------------dw1000----------------------------
 
+/*DW1000 config function*/
 static dwt_config_t config = {
     5,                /* Channel number. */
     DWT_PRF_64M,      /* Pulse repetition frequency. */
@@ -108,6 +111,9 @@ static void led_toggle_timer_callback (void * pvParameter)
 
 #endif   // #ifdef USE_FREERTOS
 
+
+
+
 int main(void)
 {
   /* Setup some LEDs for debug Green and Blue on DWM1001-DEV */
@@ -128,13 +134,13 @@ int main(void)
   
   //-------------dw1000  ini------------------------------------	
 
-  /* Setup DW1000 IRQ pin */  
-  nrf_gpio_cfg_input(DW1000_IRQ, NRF_GPIO_PIN_NOPULL); 		//irq
-  
+  /* Setup NRF52832 interrupt on GPIO 25 : connected to DW1000 IRQ*/
+  vInterruptInit();
+	
   /*Initialization UART*/
   boUART_Init ();
-  printf("Singled Sided Two Way Ranging Initiator Example \r\n");
-  
+  printf("Singled Sided Two Way Ranging Initiator with Interrupt Example \r\n");
+	
   /* Reset DW1000 */
   reset_DW1000(); 
 
@@ -148,11 +154,18 @@ int main(void)
     while (1) {};
   }
 
-  // Set SPI to 8MHz clock
+  // Set SPI to 8MHz clock  
   port_set_dw1000_fastrate();
 
   /* Configure DW1000. */
   dwt_configure(&config);
+
+  /* Initialization of the DW1000 interrupt*/
+  /* Callback are defined in ss_init_main.c */
+  dwt_setcallbacks(&tx_conf_cb, &rx_ok_cb, &rx_to_cb, &rx_err_cb);
+
+  /* Enable wanted interrupts (TX confirmation, RX good frames, RX timeouts and RX errors). */
+  dwt_setinterrupt(DWT_INT_TFRS | DWT_INT_RFCG | DWT_INT_RFTO | DWT_INT_RXPTO | DWT_INT_RPHE | DWT_INT_RFCE | DWT_INT_RFSL | DWT_INT_SFDT, 1);
 
   /* Apply default antenna delay value. See NOTE 2 below. */
   dwt_setrxantennadelay(RX_ANT_DLY);
@@ -172,20 +185,53 @@ int main(void)
   #ifdef USE_FREERTOS		
     /* Start FreeRTOS scheduler. */
     vTaskStartScheduler();	
-
-    while(1) 
-    {};
+      while(1)
+      {};
   #else
-
     // No RTOS task here so just call the main loop here.
     // Loop forever responding to ranging requests.
-    while (1)
-    {
-      ss_init_run();
-    }
-
+      while (1)
+      {
+        ss_init_run();
+      }
+		
   #endif
+		
 }
+
+/*DWM1000 interrupt initialization and handler definition*/
+
+/*!
+* Interrupt handler calls the DW1000 ISR API. Call back corresponding to each event defined in ss_init_main
+*/
+void vInterruptHandler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
+{
+  dwt_isr(); // DW1000 interrupt service routine 
+}
+
+/*!
+* @brief Configure an IO pin as a positive edge triggered interrupt source.
+*/
+void vInterruptInit (void)
+{
+  ret_code_t err_code;
+
+  if (nrf_drv_gpiote_is_init())
+    printf("nrf_drv_gpiote_init already installed\n");
+  else
+    nrf_drv_gpiote_init();
+
+  // input pin, +ve edge interrupt, no pull-up
+  nrf_drv_gpiote_in_config_t in_config = GPIOTE_CONFIG_IN_SENSE_LOTOHI(true);
+  in_config.pull = NRF_GPIO_PIN_NOPULL;
+
+  // Link this pin interrupt source to its interrupt handler
+  err_code = nrf_drv_gpiote_in_init(DW1000_IRQ, &in_config, vInterruptHandler);
+  APP_ERROR_CHECK(err_code);
+
+  nrf_drv_gpiote_in_event_enable(DW1000_IRQ, true);
+}
+
 
 /*****************************************************************************************************************************************************
  * NOTES:
@@ -200,14 +246,12 @@ int main(void)
  *    device should have its own antenna delay properly calibrated to get good precision when performing range measurements.
  * 3. This timeout is for complete reception of a frame, i.e. timeout duration must take into account the length of the expected frame. Here the value
  *    is arbitrary but chosen large enough to make sure that there is enough time to receive the complete response frame sent by the responder at the
- *    6.8M data rate used (around 200 µs).
+ *    6.8M data rate used (around 200 Âµs).
  * 4. In a real application, for optimum performance within regulatory limits, it may be necessary to set TX pulse bandwidth and TX power, (using
  *    the dwt_configuretxrf API call) to per device calibrated values saved in the target system or the DW1000 OTP memory.
  * 5. The user is referred to DecaRanging ARM application (distributed with EVK1000 product) for additional practical example of usage, and to the
  *     DW1000 API Guide for more details on the DW1000 driver functions.
  *
  ****************************************************************************************************************************************************/
-
-
 
 

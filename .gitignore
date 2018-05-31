@@ -56,8 +56,8 @@ dkms.conf
 ./examples/*/*/_build
 
 # SES Build directories
-./examples/*/*/output/*
-./examples/*/*/output
+./examples/*/*/Output/*
+./examples/*/*/Output
 
 # Arm project user dependant file 
 ./examples/*/*.uvguix.*

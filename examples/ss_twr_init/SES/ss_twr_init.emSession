@@ -2,8 +2,7 @@
 <session>
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
-  <BreakpointListItem trigger="" line="134" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="159" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../ss_init_main.c" useHWbreakpoint="false"/>
+  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBufferWindow>
@@ -24,6 +23,13 @@
  <Project>
   <ProjectSessionItem path="ss_twr_init"/>
   <ProjectSessionItem path="ss_twr_init;ss_twr_init"/>
+  <ProjectSessionItem path="ss_twr_init;ss_twr_init;Application"/>
+  <ProjectSessionItem path="ss_twr_init;ss_twr_init;Board Definition"/>
+  <ProjectSessionItem path="ss_twr_init;ss_twr_init;Board Support"/>
+  <ProjectSessionItem path="ss_twr_init;ss_twr_init;Config"/>
+  <ProjectSessionItem path="ss_twr_init;ss_twr_init;Decadriver"/>
+  <ProjectSessionItem path="ss_twr_init;ss_twr_init;Freertos"/>
+  <ProjectSessionItem path="ss_twr_init;ss_twr_init;nRF_Libraries"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ss_twr_init" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -37,6 +43,9 @@
  <Register4>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ss_twr_init" decimalNodes="" octalNodes="" unsignedNodes=""/>
  </Register4>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
  <TraceWindow>
   <Trace enabled="Yes"/>
  </TraceWindow>
@@ -53,12 +62,8 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="52" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../nRF5_SDK_14.2.0/components/libraries/util/app_util_platform.h" debugPath="../../../nRF5_SDK_14.2.0/components/libraries/util/app_util_platform.h" selected="0" top="6" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="136" useTextEdit="1" useBinaryEdit="0" left="0" path="C:/users/ybernard/appdata/local/segger/segger embedded studio/v3/packages/nrf/cmsis/device/include/nrf52.h" debugPath="C:/users/ybernard/appdata/local/segger/segger embedded studio/v3/packages/nrf/cmsis/device/include/nrf52.h" selected="0" top="99" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="139" useTextEdit="1" useBinaryEdit="0" left="0" path="../main.c" debugPath="../main.c" selected="0" top="91" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="127" y="146" useTextEdit="1" useBinaryEdit="0" left="0" path="../ss_init_main.c" debugPath="../ss_init_main.c" selected="1" top="122" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="2686" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../nRF5_SDK_14.2.0/external/freertos/source/tasks.c" debugPath="../../../nRF5_SDK_14.2.0/external/freertos/source/tasks.c" selected="0" top="2654" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="5" y="95" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../nRF5_SDK_14.2.0/components/libraries/uart/retarget.c" debugPath="../../../nRF5_SDK_14.2.0/components/libraries/uart/retarget.c" selected="0" top="57" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="181" useTextEdit="1" useBinaryEdit="0" left="0" path="../main.c" selected="1" top="142" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="237" useTextEdit="1" useBinaryEdit="0" left="0" path="../ss_init_main.c" selected="0" top="213" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="ss_twr_init" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="nrf52832_xxaa" debugSearchFileMap="" fileDialogInitialDirectory="C:/WorkArea/Repositories/dwm1001-keil-examples/nRF5_SDK_14.2.0/components/toolchain" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <ARMCrossStudioWindow activeProject="ss_twr_init" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="nrf52832_xxaa" debugSearchFileMap="" fileDialogInitialDirectory="C:/WorkArea/Repositories/dwm1001-keil-examples/nRF5_SDK_14.2.0/components/toolchain" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

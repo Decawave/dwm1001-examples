@@ -90,6 +90,7 @@
   <configuration Name="Internal" hidden="Yes" />
   <configuration
     Name="DWM1001DEV"
+    build_toolchain_directory="C:\Program Files\SEGGER\SEGGER Embedded Studio for ARM 3.40\gcc\arm-none-eabi\bin"
     inherited_configurations="Internal"
     linker_section_placement_file="$(SolutionDir)/RTE/flash_placement.xml" />
 </solution>
