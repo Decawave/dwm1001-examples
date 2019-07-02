@@ -1,4 +1,4 @@
-# dwm1001-keil-examples
+# FORK OF dwm1001-examples
 ## Overview
 
 This project contains C simple examples for DWM1001 hardware and its derivatives, such as the DWM1001-DEV board.
@@ -12,7 +12,7 @@ The C simple examples allow user to discover the key functionalities offered by 
 
 The project is built as follow : 
 ```
-dwm1001-keil-examples/
+Root
 ├── boards            // DWM1001-DEV board specific definitions
 ├── deca_driver       // DW1000 API software package 2.04 
 ├── examples          // C simple examples 
@@ -28,7 +28,6 @@ For more information about nrF52832 and nrF SDK, please visit http://infocenter.
 
 The examples are ready to use with the following IDE :
 * Segger Embedded Studio (SES)
-* Keil KEIL µVision
 
 ## Segger Embedded Studio
 
@@ -51,24 +50,6 @@ CMSIS-CORE Support Package (version 4.05)
 Nordic Semiconductor nRF CPU Support Package (version 1.06)                                                                           
 
 They can be install from SES itself, through the package manager in the tools menu. 
-
-## KEIL µVision IDE
-
-Each example contains a µVision5 project file for Keil µVision IDE. The examples compile and load cleanly to the DWM1001.
-The project was created with the KEIL uVision version V5.24.2.0. 
-
-Keil µVision has a free license for project up to 32KB. For more information regarding Keil µVision, please visit http://www2.keil.com/mdk5/uvision/
-
-### µVision Error: Flash Download failed - "Cortex-M4"
-
-This error can be observed if there is a memory conflict between the binary to load and the current firmware on the target hardware. This issue can be easily fixed by fully erasing the target device 's flash memory. Keil µVision cannot perform a full erase and the following free tool can be used :
-
-* J-flash lite 
-* nrfjprog command line script
-
-For more information about the issue, please see :
-
-https://devzone.nordicsemi.com/f/nordic-q-a/18278/error-flash-download-failed---cortex---m4-while-flashing-softdevice-from-keil-uvision-5
 
 ## Example Details 
 
@@ -99,7 +80,7 @@ Calibration may be necessary in order to have an accurate measurement. It can be
 This example contains the source code for the responder. The receiver will receive a frame from the initiator and send the corresponding answer.
 
 ```
-dwm1001-keil-examples/examples/ss_twr_resp/
+dwm1001-examples/examples/ss_twr_resp/
 ├── config                    // Contains sdk_config.h file for nrF SDK 14.2 customization
 ├── main.c                    // Initialization and main program
 ├── ss_resp_main.c            // Single sided responder core program
@@ -118,7 +99,7 @@ This example implements a TWI between the LIS2DH12 and the nrF52832.
 The blue led will be on when a motion is detected by the LIS2DH12. It also reports the accelerometer state on the UART.
 
 ```
-dwm1001-keil-examples/examples/twi_accel/
+dwm1001-examples/examples/twi_accel/
 ├── config                    // Contains sdk_config.h file for nrF SDK 14.2 customization
 ├── LIS2DH12                  // LIS2DH12 (accelerometer) low level driver and api
 ├── main.c                    // Initialization and main program
