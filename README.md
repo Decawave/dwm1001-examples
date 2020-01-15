@@ -1,4 +1,9 @@
 # dwm1001-keil-examples
+
+*Note that the examples below consist in very basic application using the UWB features of the DWM1001C. These examples are not intended to be used in a commercial application and may not comply with regulation requirements.*
+
+*Advanced firmware for DWM1001C that would comply with regulations can be found on https://www.decawave.com/product/dwm1001-module/*
+
 ## Overview
 
 This project contains C simple examples for DWM1001 hardware and its derivatives, such as the DWM1001-DEV board.
