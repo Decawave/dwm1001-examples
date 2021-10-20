@@ -121,7 +121,7 @@ int ss_resp_run(void)
 
     /* A frame has been received, read it into the local buffer. */
     frame_len = dwt_read32bitreg(RX_FINFO_ID) & RX_FINFO_RXFL_MASK_1023;
-    if (frame_len <= RX_BUFFER_LEN)
+    if (frame_len <= RX_BUF_LEN)
     {
       dwt_readrxdata(rx_buffer, frame_len, 0);
     }
